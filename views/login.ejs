@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/login',
+					data: $('#form').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="Success!") {
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<!-- <div class="col-md-4 col-md-offset-4">
+		<div>
+			<p>Login</p>
+		</div>
+		<div class="form-group">
+			<form id="form" method="post" >
+				<input type="text" name="email" placeholder="E-mail" required="" class="form-control"><br/>
+				<input type="password" name="password" placeholder="Password" required="" class="form-control"><br/>
+				<input type="submit" value="Login" class="btn btn-success">
+			</form>
+		</div>
+		<div class="mssg bg-danger">
+			<span id="check" ></span>
+		</div>
+		<div id="LangTable"><a href="/profile" id="aa"></a>
+		</div>
+		<div><span>Do you forgot password?</span><a href="/forgetpass">Click here</a>
+		<div><span>Create a new Account?</span><a href="/">Register here</a>
+
+		</div>
+		
+	</div> -->
+	<div class="container d-flex justify-content-center align-items-center vh-100" style="margin-left: 50vh;">
+		<div class="col-md-8 bg-light p-5 rounded" style="margin-top: 10vh;">
+			<div class="text-center">
+				<h2 style="margin-bottom: 2vh;">Login</h2>
+			</div>
+			<div class="form-group">
+				<form id="form" method="post">
+					<input type="text" name="email" placeholder="E-mail" required="" class="form-control rounded-pill mb-2" style="font-size: 1.5vw;margin-bottom: 1vh; border-radius: 20px;padding: 4vh;">
+					<input type="password" name="password" placeholder="Password" required="" class="form-control rounded-pill mb-2" style="font-size: 1.5vw; border-radius: 20px;padding: 4vh;">
+					<button type="submit" class="btn btn-success btn-block btn-lg" style="font-size: 2vw; margin-top: 5vh; border-radius: 20px;padding: 4vh;">Login</button>
+				</form>
+			</div>
+			<div class="alert alert-danger mt-3" role="alert">
+				<span id="check"></span>
+			</div>
+			<div class="text-center">
+				<a href="/profile" id="aa">Go to Profile</a>
+			</div>
+			<div class="text-center mt-3">
+				<span>Forgot your password?</span>
+				<a href="/forgetpass" class="ml-2">Click here</a>
+			</div>
+			<div class="text-center mt-2">
+				<span>Create a new account?</span>
+				<a href="/" class="ml-2">Register here</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+</body>
+</html>
